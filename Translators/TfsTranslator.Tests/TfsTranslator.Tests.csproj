@@ -78,6 +78,8 @@
     <Content Include="InValidSample.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TfsTranslatorTests.Execute_fails_on_non_parsable_input.approved.txt" />
+    <Content Include="TfsTranslatorTests.Execute_Result_Matches_Expectation.approved.txt" />
     <Content Include="ValidSample.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
