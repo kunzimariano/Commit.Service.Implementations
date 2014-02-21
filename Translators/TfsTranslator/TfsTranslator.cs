@@ -17,9 +17,6 @@ namespace TfsTranslator
 
 		public bool CanProcess(InboundMessage message)
 		{
-			if (string.IsNullOrEmpty(message.Body))
-				return false;
-
 			return IsUserAgentFromTfs(message);
 		}
 
@@ -38,7 +35,7 @@ namespace TfsTranslator
 			catch
 			{
 				return Translation.FailureWithResponse(
-					"It was not possible to parse the message.",
+					"It was not possible to translate the message.",
 					new Response() { Body = GetResponseBody(), Headers = GetResponseHeaders() }
 					);
 			}

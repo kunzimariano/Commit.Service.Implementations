@@ -1,1 +1,19 @@
-﻿{"Author":{"Name":"CORP\\jgough","Email":null,"Url":null},"OccurredAt":"0001-01-01T00:00:00+00:00","Comment":"Yep there it is AT-01069","Repo":{"Name":"Hello World","Url":null},"SourceType":"TFS","CommitId":{"Name":"128","Url":null},"Attributes":null}
+﻿{
+  "Author": {
+    "Name": "CORP\\jgough",
+    "Email": null,
+    "Url": null
+  },
+  "OccurredAt": "0001-01-01T00:00:00+00:00",
+  "Comment": "Yep there it is AT-01069",
+  "Repo": {
+    "Name": "Hello World",
+    "Url": null
+  },
+  "SourceType": "TFS",
+  "CommitId": {
+    "Name": "128",
+    "Url": null
+  },
+  "Attributes": null
+}

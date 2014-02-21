@@ -14,6 +14,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{17E0C2
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubTranslator", "Translators\GitHubTranslator\GitHubTranslator.csproj", "{127B136A-A878-46E5-9964-57FB792F5981}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHubTranslator.Tests", "Translators\GitHubTranslator.Tests\GitHubTranslator.Tests.csproj", "{DCC40D85-6B13-4936-B0A2-73F63E1B02E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +32,14 @@ Global
 		{B41E19FB-3966-4827-BC41-0AF577B144AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B41E19FB-3966-4827-BC41-0AF577B144AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B41E19FB-3966-4827-BC41-0AF577B144AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{127B136A-A878-46E5-9964-57FB792F5981}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{127B136A-A878-46E5-9964-57FB792F5981}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{127B136A-A878-46E5-9964-57FB792F5981}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{127B136A-A878-46E5-9964-57FB792F5981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCC40D85-6B13-4936-B0A2-73F63E1B02E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC40D85-6B13-4936-B0A2-73F63E1B02E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC40D85-6B13-4936-B0A2-73F63E1B02E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC40D85-6B13-4936-B0A2-73F63E1B02E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -35,5 +47,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D85914E1-C344-444E-9E09-4318B74A53F2} = {64E99B42-7493-47FE-B844-207EDF32573C}
 		{B41E19FB-3966-4827-BC41-0AF577B144AD} = {64E99B42-7493-47FE-B844-207EDF32573C}
+		{127B136A-A878-46E5-9964-57FB792F5981} = {64E99B42-7493-47FE-B844-207EDF32573C}
+		{DCC40D85-6B13-4936-B0A2-73F63E1B02E7} = {64E99B42-7493-47FE-B844-207EDF32573C}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,59 @@
+﻿[
+  {
+    "Author": {
+      "Name": "The Null Developer",
+      "Email": "dev@null.org",
+      "Url": null
+    },
+    "OccurredAt": "2010-02-15T19:00:00-03:00",
+    "Comment": "okay i give in",
+    "Repo": {
+      "Name": "SomeRepo",
+      "Url": "https://github.com/kunzimariano/SomeRepo"
+    },
+    "SourceType": "GitHub",
+    "CommitId": {
+      "Name": "de8251ff97ee194a289832576287d6f8ad74e3d0",
+      "Url": null
+    },
+    "Attributes": null
+  },
+  {
+    "Author": {
+      "Name": "Doc U. Mentation",
+      "Email": "author@github.com",
+      "Url": null
+    },
+    "OccurredAt": "2011-02-15T19:00:00-03:00",
+    "Comment": "Updating the docs, that\"s my job",
+    "Repo": {
+      "Name": "SomeRepo",
+      "Url": "https://github.com/kunzimariano/SomeRepo"
+    },
+    "SourceType": "GitHub",
+    "CommitId": {
+      "Name": "de8251ff97ee194a289832576287d6f8ad74e3d1",
+      "Url": null
+    },
+    "Attributes": null
+  },
+  {
+    "Author": {
+      "Name": "Doc U. Mentation",
+      "Email": "author@github.com",
+      "Url": null
+    },
+    "OccurredAt": "2012-02-15T19:00:00-03:00",
+    "Comment": "Oops, typos",
+    "Repo": {
+      "Name": "SomeRepo",
+      "Url": "https://github.com/kunzimariano/SomeRepo"
+    },
+    "SourceType": "GitHub",
+    "CommitId": {
+      "Name": "de8251ff97ee194a289832576287d6f8ad74e3d2",
+      "Url": null
+    },
+    "Attributes": null
+  }
+]

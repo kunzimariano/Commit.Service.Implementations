@@ -28,11 +28,11 @@ namespace TfsTranslator.Tests
 				{"User-Agent", "Team Foundation (TfsJobAgent.exe, 10.0.40219.1)"}
 			};
 
-			var validSampleData = File.ReadAllText("ValidSample.xml");
+			var validSampleData = File.ReadAllText(@".\TestData\ValidMessage.xml");
 			_validAttempt = new InboundMessage(validSampleData, _headers);
 
 
-			var inValidSampleData = File.ReadAllText("InValidSample.xml");
+			var inValidSampleData = File.ReadAllText(@".\TestData\InValidMessage.xml");
 			_invalidAttempt = new InboundMessage(inValidSampleData, _headers);
 		}
 
@@ -81,9 +81,8 @@ namespace TfsTranslator.Tests
 			Translation.Result result = _translator.Execute(_validAttempt);
 			var temp = result as Translation.Result.SuccessWithResponse;
 			CommitMessage cm = temp.Commits.FirstOrDefault();
-			string json = JsonConvert.SerializeObject(cm);
+			string json = JsonConvert.SerializeObject(cm, Formatting.Indented);
 			Approvals.Verify(json);
-			//Approvals.Verify(StringUtils.WritePropertiesToString(cm));
 		}
 	}
 }
