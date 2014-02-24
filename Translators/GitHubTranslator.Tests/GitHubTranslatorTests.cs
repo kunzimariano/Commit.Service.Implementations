@@ -52,13 +52,14 @@ namespace GitHubTranslator.Tests
 		public void Execute_matches_expectations()
 		{
 			string sample = File.ReadAllText(@".\TestData\ValidMessage.json");
-			var commitAttempt = new InboundMessage(sample, new Dictionary<string, string>());
+			var message = new InboundMessage(sample, new Dictionary<string, string>());
 
-			var result = (Translation.Result.Success)_translator.Execute(commitAttempt);
-
+			var result = _translator.Execute(message);
 			Assert.IsTrue(result.IsSuccess);
-			Assert.AreEqual(1, result.Commits.Count());
-			Approvals.Verify(JsonConvert.SerializeObject(result.Commits, Formatting.Indented));
+
+			var success = (Translation.Result.Success)result;
+			Assert.AreEqual(1, success.Commits.Count());
+			Approvals.Verify(JsonConvert.SerializeObject(success.Commits, Formatting.Indented));
 		}
 
 		[Test]
@@ -67,8 +68,7 @@ namespace GitHubTranslator.Tests
 			string sample = File.ReadAllText(@".\TestData\InValidMessage.json");
 			var commitAttempt = new InboundMessage(sample, new Dictionary<string, string>());
 
-			var result = (Translation.Result.Failure)_translator.Execute(commitAttempt);
-
+			var result = _translator.Execute(commitAttempt);
 			Assert.IsTrue(result.IsFailure);
 		}
 
@@ -79,11 +79,12 @@ namespace GitHubTranslator.Tests
 			string sample = File.ReadAllText(@".\TestData\ValidMessageWithThreeCommits.json");
 			var message = new InboundMessage(sample, new Dictionary<string, string>());
 
-			var result = (Translation.Result.Success)_translator.Execute(message);
+			var result = _translator.Execute(message);
 
 			Assert.IsTrue(result.IsSuccess);
-			Assert.AreEqual(3, result.Commits.Count());
-			Approvals.Verify(JsonConvert.SerializeObject(result.Commits, Formatting.Indented));
+			var success = (Translation.Result.Success)result;
+			Assert.AreEqual(3, success.Commits.Count());
+			Approvals.Verify(JsonConvert.SerializeObject(success.Commits, Formatting.Indented));
 		}
 	}
 }

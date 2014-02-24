@@ -18,11 +18,9 @@ namespace TfsTranslator.Tests
 		private InboundMessage _invalidMessage;
 		private Dictionary<string, string> _headers;
 
-
 		[SetUp]
 		public void SetUp()
 		{
-
 			_headers = new Dictionary<string, string>()
 			{
 				{"User-Agent", "Team Foundation (TfsJobAgent.exe, 10.0.40219.1)"}
@@ -62,10 +60,11 @@ namespace TfsTranslator.Tests
 		public void Execute_succeeds_for_valid_message()
 		{
 			Translation.Result result = _translator.Execute(_validMessage);
-			var successfulResult = result as Translation.Result.SuccessWithResponse;
 
-			Assert.AreEqual(1, successfulResult.Commits.Count());
 			Assert.IsTrue(result.IsSuccessWithResponse);
+			var success = (Translation.Result.SuccessWithResponse)result;
+
+			Assert.AreEqual(1, success.Commits.Count());
 		}
 
 		[Test]
@@ -75,8 +74,8 @@ namespace TfsTranslator.Tests
 			Translation.Result result = _translator.Execute(_invalidMessage);
 
 			Assert.IsTrue(result.IsFailureWithResponse);
-			var failedResult = result as Translation.Result.FailureWithResponse;
-			Approvals.Verify(failedResult.Response.Body);
+			var failure = (Translation.Result.FailureWithResponse)result;
+			Approvals.Verify(failure.Response.Body);
 		}
 
 
@@ -87,8 +86,8 @@ namespace TfsTranslator.Tests
 			Translation.Result result = _translator.Execute(_validMessage);
 
 			Assert.IsTrue(result.IsSuccessWithResponse);
-			var temp = result as Translation.Result.SuccessWithResponse;
-			CommitMessage cm = temp.Commits.FirstOrDefault();
+			var success = (Translation.Result.SuccessWithResponse)result;
+			CommitMessage cm = success.Commits.FirstOrDefault();
 			string json = JsonConvert.SerializeObject(cm, Formatting.Indented);
 			Approvals.Verify(json);
 		}
