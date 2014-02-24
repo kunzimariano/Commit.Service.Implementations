@@ -14,10 +14,11 @@ namespace TfsTranslator
 	public class TfsTranslator : ITranslateInboundMessageToCommits
 	{
 		private readonly Regex _eventPattern = new Regex(@"(?<=<eventXml>).*?(?=<\/eventXml>)");
+		private readonly Regex _checkInEventPattern = new Regex("<CheckinEvent xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">");
 
 		public bool CanProcess(InboundMessage message)
 		{
-			return IsUserAgentFromTfs(message);
+			return IsUserAgentFromTfs(message.Headers) && IsCheckInEvent(message.Body);
 		}
 
 		public Translation.Result Execute(InboundMessage message)
@@ -77,9 +78,18 @@ namespace TfsTranslator
 				"<?xml version=\"1.0\"?><s:Envelope xmlns:a=\"http://www.w3.org/2005/08/addressing\" xmlns:s=\"http://www.w3.org/2003/05/soap-envelope\"><s:Header><a:Action s:mustUnderstand=\"1\">http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Notification/03/IService/NotifyResponse</a:Action></s:Header><s:Body xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><NotifyResponse xmlns=\"http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Notification/03\"/></s:Body></s:Envelope>";
 		}
 
-		private bool IsUserAgentFromTfs(InboundMessage message)
+		private bool IsUserAgentFromTfs(IDictionary<string, string> headers)
 		{
-			return message.Headers["User-Agent"].StartsWith("Team Foundation");
+			return headers["User-Agent"].StartsWith("Team Foundation");
+		}
+
+		private bool IsCheckInEvent(string body)
+		{
+			if (string.IsNullOrWhiteSpace(body))
+				return false;
+
+			string decodedBody = HttpUtility.HtmlDecode(body);
+			return _checkInEventPattern.IsMatch(decodedBody);
 		}
 
 		private DateTimeOffset ParseDateTimeOffset(XElement e)
