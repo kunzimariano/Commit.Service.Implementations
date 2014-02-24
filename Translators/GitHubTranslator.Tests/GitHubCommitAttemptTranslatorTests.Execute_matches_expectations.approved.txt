@@ -3,7 +3,7 @@
     "Author": {
       "Name": "kunzimariano",
       "Email": "someemail@somesome.com",
-      "Url": null
+      "Url": "https://github.com/kunzimariano"
     },
     "OccurredAt": "2014-02-20T14:45:27-03:00",
     "Comment": "Update README.md",
@@ -14,7 +14,7 @@
     "SourceType": "GitHub",
     "CommitId": {
       "Name": "951eaeafb49c00c5b185a77a608cdf63aa94b5f4",
-      "Url": null
+      "Url": "https://github.com/kunzimariano/SomeRepo/commit/951eaeafb49c00c5b185a77a608cdf63aa94b5f4"
     },
     "Attributes": null
   }

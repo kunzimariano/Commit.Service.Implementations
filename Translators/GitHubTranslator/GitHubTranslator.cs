@@ -42,12 +42,25 @@ namespace GitHubTranslator
 			foreach (var commit in root.commits)
 			{
 				var commitMessage = new CommitMessage(
-					new Author() { Email = commit.author.email.ToString(), Name = commit.author.name.ToString() },
+					new Author()
+					{
+						Email = commit.author.email.ToString(),
+						Name = commit.author.name.ToString(),
+						Url = GetUserUrl(commit.author.username.ToString())
+					},
 					DateTimeOffset.Parse(commit.timestamp.ToString()),
 					commit.message.ToString(),
-					new Repo() { Name = root.repository.name, Url = root.repository.url },
+					new Repo()
+					{
+						Name = root.repository.name.ToString(),
+						Url = root.repository.url.ToString()
+					},
 					"GitHub",
-					new CommitId() { Name = commit.id.ToString() },
+					new CommitId()
+					{
+						Name = commit.id.ToString(),
+						Url = commit.url.ToString()
+					},
 					null
 					);
 
@@ -55,6 +68,11 @@ namespace GitHubTranslator
 			}
 
 			return commitMessages;
+		}
+
+		private string GetUserUrl(string username)
+		{
+			return string.Format("https://github.com/{0}", username);
 		}
 
 		private bool ContainsGitHubEventHeaderAndIsPush(InboundMessage message)

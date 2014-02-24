@@ -1,36 +1,41 @@
 ﻿{
     "after": "951eaeafb49c00c5b185a77a608cdf63aa94b5f4",
     "before": "d9dd1cc321440c890fd3a0ec950f1feb6d797b38",
-    "commits": 
-    [
+    "commits": [
         {
-          "id": "de8251ff97ee194a289832576287d6f8ad74e3d0",
-          "author": {
-            "email": "dev@null.org",
-            "name": "The Null Developer"
-          },
-          "message": "okay i give in",
-          "timestamp": "2010-02-15T14:00:00-08:00",
+            "author": {
+                "email": "dev@null.org",
+                "name": "The Null Developer",
+                "username": "kunzimariano"
+            },
+            "id": "de8251ff97ee194a289832576287d6f8ad74e3d0",
+            "message": "okay i give in",
+            "timestamp": "2010-02-15T14:00:00-08:00",
+            "url": "https://github.com/kunzimariano/SomeRepo/commit/951eaeafb49c00c5b185a77a608cdf63aa94b5f1"
         },
         {
-          "id": "de8251ff97ee194a289832576287d6f8ad74e3d1",
-          "author": {
-            "email": "author@github.com",
-            "name": "Doc U. Mentation"
-          },
-          "message": "Updating the docs, that\"s my job",
-          "timestamp": "2011-02-15T14:00:00-08:00"
+            "author": {
+                "email": "author@github.com",
+                "name": "Doc U. Mentation",
+                "username": "kunzimariano"
+            },
+            "id": "de8251ff97ee194a289832576287d6f8ad74e3d1",
+            "message": "Updating the docs, that\"s my job",
+            "timestamp": "2011-02-15T14:00:00-08:00",
+            "url": "https://github.com/kunzimariano/SomeRepo/commit/951eaeafb49c00c5b185a77a608cdf63aa94b5f2"
         },
         {
-          "id": "de8251ff97ee194a289832576287d6f8ad74e3d2",
-          "author": {
-            "email": "author@github.com",
-            "name": "Doc U. Mentation"
-          },
-          "message": "Oops, typos",
-          "timestamp": "2012-02-15T14:00:00-08:00"
+            "author": {
+                "email": "author@github.com",
+                "name": "Doc U. Mentation",
+                "username": "kunzimariano"
+            },
+            "id": "de8251ff97ee194a289832576287d6f8ad74e3d2",
+            "message": "Oops, typos",
+            "timestamp": "2012-02-15T14:00:00-08:00",
+            "url": "https://github.com/kunzimariano/SomeRepo/commit/951eaeafb49c00c5b185a77a608cdf63aa94b5f3"
         }
-    ],  
+    ],
     "compare": "https://github.com/kunzimariano/SomeRepo/compare/d9dd1cc32144...951eaeafb49c",
     "created": false,
     "deleted": false,

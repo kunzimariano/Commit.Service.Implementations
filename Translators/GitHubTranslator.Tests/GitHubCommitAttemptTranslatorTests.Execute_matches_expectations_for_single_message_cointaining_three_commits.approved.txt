@@ -3,7 +3,7 @@
     "Author": {
       "Name": "The Null Developer",
       "Email": "dev@null.org",
-      "Url": null
+      "Url": "https://github.com/kunzimariano"
     },
     "OccurredAt": "2010-02-15T19:00:00-03:00",
     "Comment": "okay i give in",
@@ -14,7 +14,7 @@
     "SourceType": "GitHub",
     "CommitId": {
       "Name": "de8251ff97ee194a289832576287d6f8ad74e3d0",
-      "Url": null
+      "Url": "https://github.com/kunzimariano/SomeRepo/commit/951eaeafb49c00c5b185a77a608cdf63aa94b5f1"
     },
     "Attributes": null
   },
@@ -22,7 +22,7 @@
     "Author": {
       "Name": "Doc U. Mentation",
       "Email": "author@github.com",
-      "Url": null
+      "Url": "https://github.com/kunzimariano"
     },
     "OccurredAt": "2011-02-15T19:00:00-03:00",
     "Comment": "Updating the docs, that\"s my job",
@@ -33,7 +33,7 @@
     "SourceType": "GitHub",
     "CommitId": {
       "Name": "de8251ff97ee194a289832576287d6f8ad74e3d1",
-      "Url": null
+      "Url": "https://github.com/kunzimariano/SomeRepo/commit/951eaeafb49c00c5b185a77a608cdf63aa94b5f2"
     },
     "Attributes": null
   },
@@ -41,7 +41,7 @@
     "Author": {
       "Name": "Doc U. Mentation",
       "Email": "author@github.com",
-      "Url": null
+      "Url": "https://github.com/kunzimariano"
     },
     "OccurredAt": "2012-02-15T19:00:00-03:00",
     "Comment": "Oops, typos",
@@ -52,7 +52,7 @@
     "SourceType": "GitHub",
     "CommitId": {
       "Name": "de8251ff97ee194a289832576287d6f8ad74e3d2",
-      "Url": null
+      "Url": "https://github.com/kunzimariano/SomeRepo/commit/951eaeafb49c00c5b185a77a608cdf63aa94b5f3"
     },
     "Attributes": null
   }
