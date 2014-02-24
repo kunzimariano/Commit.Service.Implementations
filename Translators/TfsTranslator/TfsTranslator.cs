@@ -53,24 +53,15 @@ namespace TfsTranslator
 		{
 			var c = document.Descendants("CheckinEvent").FirstOrDefault();
 
-			//TODO: puke, fix this
-			//var creationDate = c.Element("CreationDate").Value;
-			//creationDate += " " + c.Element("TimeZoneOffset").Value;
-			//var timeOffset = DateTimeOffset.Parse(creationDate);
-
-			var timeOffset = new DateTimeOffset();
-
-
 			return new CommitMessage(
 					new Author() { Name = c.Element("Committer").Value },
-					timeOffset,
+					ParseDateTimeOffset(c),
 					c.Element("Comment").Value,
 					new Repo() { Name = c.Element("TeamProject").Value },
 					"TFS",
 					new CommitId() { Name = c.Element("Number").Value },
 					null);
 		}
-
 
 		private IDictionary<string, string> GetResponseHeaders()
 		{
@@ -89,6 +80,15 @@ namespace TfsTranslator
 		private bool IsUserAgentFromTfs(InboundMessage message)
 		{
 			return message.Headers["User-Agent"].StartsWith("Team Foundation");
+		}
+
+		private DateTimeOffset ParseDateTimeOffset(XElement e)
+		{
+			var creationDate = e.Element("CreationDate").Value;
+			// ignores the three last characters since .Net does not parse it (-05:00:00)
+			var offset = e.Element("TimeZoneOffset").Value.Remove(6);
+			string validString = string.Format("{0} {1}", creationDate, offset);
+			return DateTimeOffset.Parse(validString);
 		}
 	}
 }

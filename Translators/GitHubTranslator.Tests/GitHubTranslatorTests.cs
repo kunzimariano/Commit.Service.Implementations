@@ -48,7 +48,8 @@ namespace GitHubTranslator.Tests
 
 
 		[Test]
-		public void Execute_succeeds_for_valid_message()
+		[UseReporter(typeof(DiffReporter))]
+		public void Execute_matches_expectations()
 		{
 			string sample = File.ReadAllText(@".\TestData\ValidMessage.json");
 			var commitAttempt = new InboundMessage(sample, new Dictionary<string, string>());
@@ -57,6 +58,7 @@ namespace GitHubTranslator.Tests
 
 			Assert.IsTrue(result.IsSuccess);
 			Assert.AreEqual(1, result.Commits.Count());
+			Approvals.Verify(JsonConvert.SerializeObject(result.Commits, Formatting.Indented));
 		}
 
 		[Test]
@@ -72,7 +74,7 @@ namespace GitHubTranslator.Tests
 
 		[Test]
 		[UseReporter(typeof(DiffReporter))]
-		public void Execute_succeeds_for_single_message_cointaining_three_commits()
+		public void Execute_matches_expectations_for_single_message_cointaining_three_commits()
 		{
 			string sample = File.ReadAllText(@".\TestData\ValidMessageWithThreeCommits.json");
 			var message = new InboundMessage(sample, new Dictionary<string, string>());

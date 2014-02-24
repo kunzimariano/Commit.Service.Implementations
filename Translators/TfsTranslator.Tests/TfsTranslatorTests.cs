@@ -37,23 +37,22 @@ namespace TfsTranslator.Tests
 		}
 
 		[Test]
-		public void CanProcess_is_true_for_valid_CommitAttempt_from_TFS_request()
+		public void CanProcess_is_true_for_valid_message()
 		{
 			bool canProcess = _translator.CanProcess(_validAttempt);
 			Assert.IsTrue(canProcess);
 		}
 
 		[Test]
-		public void CanProcess_is_false_for_invalid_UserAgent()
+		public void CanProcess_is_false_for_invalid_useragent()
 		{
-			//TODO: fix this
 			_invalidAttempt.Headers["User-Agent"] = "nonsense";
 			bool canProcess = _translator.CanProcess(_invalidAttempt);
 			Assert.IsFalse(canProcess);
 		}
 
 		[Test]
-		public void Execute_succeeds_for_valid_CommitAttempt()
+		public void Execute_succeeds_for_valid_message()
 		{
 			Translation.Result result = _translator.Execute(_validAttempt);
 			var successfulResult = result as Translation.Result.SuccessWithResponse;
@@ -64,7 +63,7 @@ namespace TfsTranslator.Tests
 
 		[Test]
 		[UseReporter(typeof(DiffReporter))]
-		public void Execute_fails_on_non_parsable_input()
+		public void Execute_fails_on_non_parsable_input_and_response_matches_expectation()
 		{
 			Translation.Result result = _translator.Execute(_invalidAttempt);
 			var failedResult = result as Translation.Result.FailureWithResponse;
@@ -76,7 +75,7 @@ namespace TfsTranslator.Tests
 
 		[Test]
 		[UseReporter(typeof(DiffReporter))]
-		public void Execute_Result_Matches_Expectation()
+		public void Execute_matches_expectations()
 		{
 			Translation.Result result = _translator.Execute(_validAttempt);
 			var temp = result as Translation.Result.SuccessWithResponse;

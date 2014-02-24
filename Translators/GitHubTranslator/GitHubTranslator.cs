@@ -14,14 +14,12 @@ namespace GitHubTranslator
 	[Export(typeof(ITranslateInboundMessageToCommits))]
 	public class GitHubTranslator : ITranslateInboundMessageToCommits
 	{
-		public Translation.Result Execute(InboundMessage attempt)
+		public Translation.Result Execute(InboundMessage message)
 		{
 			try
 			{
-				var body = GetDecodedBody(attempt.Body);
-				dynamic root = JObject.Parse(body);
-
-				var commitMessages = GetCommitMessages(root);
+				var body = GetDecodedBody(message.Body);
+				var commitMessages = GetCommitMessages(body);
 
 				return Translation.Success(commitMessages);
 			}
@@ -36,8 +34,9 @@ namespace GitHubTranslator
 			return ContainsGitHubEventHeaderAndIsPush(message);
 		}
 
-		private IEnumerable<CommitMessage> GetCommitMessages(dynamic root)
+		private IEnumerable<CommitMessage> GetCommitMessages(string body)
 		{
+			dynamic root = JObject.Parse(body);
 			var commitMessages = new List<CommitMessage>();
 
 			foreach (var commit in root.commits)
