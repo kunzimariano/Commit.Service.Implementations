@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using ApprovalUtilities.Reflection;
@@ -60,37 +62,46 @@ namespace TfsTranslator.Tests
 		public void Execute_succeeds_for_valid_message()
 		{
 			Translation.Result result = _translator.Execute(_validMessage);
-
 			Assert.IsTrue(result.TranslationResult.IsRecognized);
 			var translationResult = (InboundMessageResponse.TranslationResult.Recognized)result.TranslationResult;
-			//TODO: assert for response too
 			Assert.AreEqual(1, translationResult.commits.Count());
 		}
 
 		[Test]
 		[UseReporter(typeof(DiffReporter))]
-		public void Execute_fails_on_non_parsable_input_and_response_matches_expectation()
+		public void On_Execute_succeeds_commit_result_matches_expectation()
 		{
-			Translation.Result result = _translator.Execute(_invalidMessage);
-
-			Assert.IsTrue(result.TranslationResult.IsFailure);
-			var translationResult = (InboundMessageResponse.TranslationResult.Failure)result.TranslationResult;
-			//TODO: we need the response so it can be sent to the tfs server
-			//Approvals.Verify(translationResult.response);
+			Translation.Result result = _translator.Execute(_validMessage);
+			var translationResult = (InboundMessageResponse.TranslationResult.Recognized)result.TranslationResult;
+			var cm = translationResult.commits.FirstOrDefault();
+			Approvals.Verify(JsonConvert.SerializeObject(cm, Formatting.Indented));
 		}
-
 
 		[Test]
 		[UseReporter(typeof(DiffReporter))]
-		public void Execute_matches_expectations()
+		public void On_Execute_succeeds_response_matches_expectation()
 		{
 			Translation.Result result = _translator.Execute(_validMessage);
+			var content = (InboundMessageResponse.Content.Custom)result.Content;
+			var stringResponse = content.Item.ReadAsStringAsync().Result;
+			Approvals.Verify(stringResponse);
+		}
 
-			Assert.IsTrue(result.TranslationResult.IsRecognized);
-			var translationResult = (InboundMessageResponse.TranslationResult.Recognized)result.TranslationResult;
-			CommitMessage cm = translationResult.commits.FirstOrDefault();
-			string json = JsonConvert.SerializeObject(cm, Formatting.Indented);
-			Approvals.Verify(json);
+		[Test]
+		public void Execute_fails_on_non_parsable_input()
+		{
+			Translation.Result result = _translator.Execute(_invalidMessage);
+			Assert.IsTrue(result.TranslationResult.IsFailure);
+		}
+
+		[Test]
+		[UseReporter(typeof(DiffReporter))]
+		public void On_Execute_fails_response_matches_expectation()
+		{
+			Translation.Result result = _translator.Execute(_invalidMessage);
+			var content = (InboundMessageResponse.Content.Custom)result.Content;
+			var stringResponse = content.Item.ReadAsStringAsync().Result;
+			Approvals.Verify(stringResponse);
 		}
 	}
 }

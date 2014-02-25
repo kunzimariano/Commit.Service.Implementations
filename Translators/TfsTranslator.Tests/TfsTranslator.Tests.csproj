@@ -51,6 +51,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -83,8 +84,9 @@
     <Content Include="TestData\ValidMessage.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TfsTranslatorTests.Execute_fails_on_non_parsable_input_and_response_matches_expectation.approved.txt" />
-    <Content Include="TfsTranslatorTests.Execute_matches_expectations.approved.txt" />
+    <Content Include="TfsTranslatorTests.On_Execute_fails_response_matches_expectation.approved.txt" />
+    <Content Include="TfsTranslatorTests.On_Execute_succeeds_commit_result_matches_expectation.approved.txt" />
+    <Content Include="TfsTranslatorTests.On_Execute_succeeds_response_matches_expectation.approved.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

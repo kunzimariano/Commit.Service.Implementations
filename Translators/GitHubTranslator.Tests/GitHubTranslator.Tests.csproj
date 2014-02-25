@@ -85,8 +85,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GitHubCommitAttemptTranslatorTests.Execute_matches_expectations.approved.txt" />
     <Content Include="GitHubCommitAttemptTranslatorTests.Execute_matches_expectations_for_single_message_cointaining_three_commits.approved.txt" />
+    <Content Include="GitHubCommitAttemptTranslatorTests.Execute_matches_expectation_for_valid_message.approved.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
