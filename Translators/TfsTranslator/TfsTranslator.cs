@@ -26,10 +26,10 @@ namespace TfsTranslator
 			try
 			{
 				XDocument document = DecodeContentAndCreateDocument(message);
-				CommitMessage checkIn = ParseXmlDocument(document);
+				CommitMessage commit = ParseXmlDocument(document);
 
 				return Translation.SuccessWithResponse(
-					new List<CommitMessage> { checkIn },
+					new List<CommitMessage> { commit },
 					new Response() { Body = GetResponseBody(), Headers = GetResponseHeaders() }
 					);
 			}
@@ -42,9 +42,9 @@ namespace TfsTranslator
 			}
 		}
 
-		private XDocument DecodeContentAndCreateDocument(InboundMessage attempt)
+		private XDocument DecodeContentAndCreateDocument(InboundMessage message)
 		{
-			string content = HttpUtility.HtmlDecode(attempt.Body);
+			string content = HttpUtility.HtmlDecode(message.Body);
 			Match match = _eventPattern.Match(content);
 			var document = XDocument.Parse(match.Value);
 			return document;

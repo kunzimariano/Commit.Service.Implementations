@@ -18,9 +18,7 @@ namespace GitHubTranslator
 		{
 			try
 			{
-				var body = GetDecodedBody(message.Body);
-				var commitMessages = GetCommitMessages(body);
-
+				IEnumerable<CommitMessage> commitMessages = GetCommitMessages(message.Body);
 				return Translation.Success(commitMessages);
 			}
 			catch
@@ -78,16 +76,6 @@ namespace GitHubTranslator
 		private bool ContainsGitHubEventHeaderAndIsPush(InboundMessage message)
 		{
 			return message.Headers.ContainsKey("X-Github-Event") && message.Headers["X-Github-Event"] == "push";
-		}
-
-		private string GetDecodedBody(string rawBody)
-		{
-			if (rawBody.Contains("payload="))
-			{
-				var items = rawBody.Split(new char[] { '=' });
-				rawBody = System.Web.HttpUtility.UrlDecode(items[1]);
-			}
-			return rawBody;
 		}
 	}
 }
