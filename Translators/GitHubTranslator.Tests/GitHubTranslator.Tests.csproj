@@ -42,6 +42,7 @@
     <Reference Include="ApprovalUtilities">
       <HintPath>..\..\packages\ApprovalUtilities.3.0.5\lib\net35\ApprovalUtilities.dll</HintPath>
     </Reference>
+    <Reference Include="FSharp.Core, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -56,8 +57,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="VersionOne.CommitService.Core">
-      <HintPath>..\..\packages\VersionOne.CommitService.Core.0.0.0.5\lib\net45\VersionOne.CommitService.Core.dll</HintPath>
+    <Reference Include="VersionOne.CommitService.Core, Version=0.0.0.7, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\VersionOne.CommitService.Core.0.0.0.7\lib\net45\VersionOne.CommitService.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

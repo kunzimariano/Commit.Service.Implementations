@@ -49,8 +49,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="VersionOne.CommitService.Core">
-      <HintPath>..\..\packages\VersionOne.CommitService.Core.0.0.0.5\lib\net45\VersionOne.CommitService.Core.dll</HintPath>
+    <Reference Include="VersionOne.CommitService.Core, Version=0.0.0.7, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\VersionOne.CommitService.Core.0.0.0.7\lib\net45\VersionOne.CommitService.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

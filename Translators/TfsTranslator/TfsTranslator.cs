@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Xml.Linq;
@@ -28,16 +30,16 @@ namespace TfsTranslator
 				XDocument document = DecodeContentAndCreateDocument(message);
 				CommitMessage commit = ParseXmlDocument(document);
 
-				return Translation.SuccessWithResponse(
+				return Translation.SuccessWithContent(
 					new List<CommitMessage> { commit },
-					new Response() { Body = GetResponseBody(), Headers = GetResponseHeaders() }
+					new StringContent(GetResponseBody(), Encoding.UTF8, GetMediaType())
 					);
 			}
 			catch
 			{
-				return Translation.FailureWithResponse(
+				return Translation.FailureWithContent(
 					"It was not possible to translate the message.",
-					new Response() { Body = GetResponseBody(), Headers = GetResponseHeaders() }
+					new StringContent(GetResponseBody(), Encoding.UTF8, GetMediaType())
 					);
 			}
 		}
@@ -64,12 +66,10 @@ namespace TfsTranslator
 					null);
 		}
 
-		private IDictionary<string, string> GetResponseHeaders()
+		private string GetMediaType()
 		{
-			return new Dictionary<string, string>()
-			{
-				{"Content-Type", "application/soap+xml; charset=utf-8"}
-			};
+			return "application/soap+xml";
+
 		}
 
 		private string GetResponseBody()
@@ -78,9 +78,11 @@ namespace TfsTranslator
 				"<?xml version=\"1.0\"?><s:Envelope xmlns:a=\"http://www.w3.org/2005/08/addressing\" xmlns:s=\"http://www.w3.org/2003/05/soap-envelope\"><s:Header><a:Action s:mustUnderstand=\"1\">http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Notification/03/IService/NotifyResponse</a:Action></s:Header><s:Body xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"><NotifyResponse xmlns=\"http://schemas.microsoft.com/TeamFoundation/2005/06/Services/Notification/03\"/></s:Body></s:Envelope>";
 		}
 
-		private bool IsUserAgentFromTfs(IDictionary<string, string> headers)
+		private bool IsUserAgentFromTfs(IDictionary<string, string[]> headers)
 		{
-			return headers["User-Agent"].StartsWith("Team Foundation");
+			return headers.ContainsKey("User-Agent") &&
+				   headers["User-Agent"]
+				   .Any(h => h.StartsWith("Team Foundation"));
 		}
 
 		private bool IsCheckInEvent(string body)

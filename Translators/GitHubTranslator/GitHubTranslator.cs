@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using Newtonsoft.Json.Linq;
 using VersionOne.CommitService.Interfaces;
 using VersionOne.CommitService.Types;
@@ -75,7 +76,8 @@ namespace GitHubTranslator
 
 		private bool ContainsGitHubEventHeaderAndIsPush(InboundMessage message)
 		{
-			return message.Headers.ContainsKey("X-Github-Event") && message.Headers["X-Github-Event"] == "push";
+			return message.Headers.ContainsKey("X-Github-Event")
+				&& message.Headers["X-Github-Event"].Contains("push");
 		}
 	}
 }

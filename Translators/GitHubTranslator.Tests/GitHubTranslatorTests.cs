@@ -17,8 +17,8 @@ namespace GitHubTranslator.Tests
 		[Test]
 		public void CanProcess_is_true_for_valid_headers()
 		{
-			var message = new InboundMessage("", new Dictionary<string, string>());
-			message.Headers.Add("X-Github-Event", "push");
+			var headers = new Dictionary<string, string[]>() { { "X-Github-Event", new[] { "push" } } };
+			var message = new InboundMessage("", headers);
 
 			bool canProcess = _translator.CanProcess(message);
 
@@ -28,7 +28,7 @@ namespace GitHubTranslator.Tests
 		[Test]
 		public void CanProcess_is_false_for_not_present_headers()
 		{
-			var message = new InboundMessage("", new Dictionary<string, string>());
+			var message = new InboundMessage("", new Dictionary<string, string[]>());
 
 			bool canProcess = _translator.CanProcess(message);
 
@@ -38,8 +38,8 @@ namespace GitHubTranslator.Tests
 		[Test]
 		public void CanProcess_is_false_for_not_present_push_event()
 		{
-			var message = new InboundMessage("", new Dictionary<string, string>());
-			message.Headers.Add("X-Github-Event", "pull");
+			var headers = new Dictionary<string, string[]>() { { "X-Github-Event", new[] { "pull" } } };
+			var message = new InboundMessage("", headers);
 
 			bool canProcess = _translator.CanProcess(message);
 
@@ -52,24 +52,26 @@ namespace GitHubTranslator.Tests
 		public void Execute_matches_expectations()
 		{
 			string sample = File.ReadAllText(@".\TestData\ValidMessage.json");
-			var message = new InboundMessage(sample, new Dictionary<string, string>());
+			var message = new InboundMessage(sample, new Dictionary<string, string[]>());
 
-			var result = _translator.Execute(message);
-			Assert.IsTrue(result.IsSuccess);
+			Translation.Result result = _translator.Execute(message);
 
-			var success = (Translation.Result.Success)result;
-			Assert.AreEqual(1, success.Commits.Count());
-			Approvals.Verify(JsonConvert.SerializeObject(success.Commits, Formatting.Indented));
+			Assert.IsTrue(result.TranslationResult.IsRecognized);
+			var translationResult = (InboundMessageResponse.TranslationResult.Recognized)result.TranslationResult;
+
+
+			Assert.AreEqual(1, translationResult.commits.Count());
+			Approvals.Verify(JsonConvert.SerializeObject(translationResult.commits, Formatting.Indented));
 		}
 
 		[Test]
 		public void Execute_fails_for_invalid_message()
 		{
 			string sample = File.ReadAllText(@".\TestData\InValidMessage.json");
-			var commitAttempt = new InboundMessage(sample, new Dictionary<string, string>());
+			var message = new InboundMessage(sample, new Dictionary<string, string[]>());
 
-			var result = _translator.Execute(commitAttempt);
-			Assert.IsTrue(result.IsFailure);
+			var result = _translator.Execute(message);
+			Assert.IsTrue(result.TranslationResult.IsFailure);
 		}
 
 		[Test]
@@ -77,14 +79,14 @@ namespace GitHubTranslator.Tests
 		public void Execute_matches_expectations_for_single_message_cointaining_three_commits()
 		{
 			string sample = File.ReadAllText(@".\TestData\ValidMessageWithThreeCommits.json");
-			var message = new InboundMessage(sample, new Dictionary<string, string>());
+			var message = new InboundMessage(sample, new Dictionary<string, string[]>());
 
 			var result = _translator.Execute(message);
 
-			Assert.IsTrue(result.IsSuccess);
-			var success = (Translation.Result.Success)result;
-			Assert.AreEqual(3, success.Commits.Count());
-			Approvals.Verify(JsonConvert.SerializeObject(success.Commits, Formatting.Indented));
+			Assert.IsTrue(result.TranslationResult.IsRecognized);
+			var translationResult = (InboundMessageResponse.TranslationResult.Recognized)result.TranslationResult;
+			Assert.AreEqual(3, translationResult.commits.Count());
+			Approvals.Verify(JsonConvert.SerializeObject(translationResult.commits, Formatting.Indented));
 		}
 	}
 }
